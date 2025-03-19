@@ -26,6 +26,7 @@ Config :: struct {
 
 source_file_path: string
 
+// FIXME: the script adds an empty line at the beginning
 main :: proc() {
 	if len(os.args) != 2 {
 		println(HELP_TEXT)
@@ -91,6 +92,11 @@ apply_config :: proc(config: Config, all_configs: []Config) {
 	text := string(data)
 	lines := strings.split_lines(text)
 
+	if len(lines) == 0 {
+		println("Cannot run the script on an empty file.")
+		os.exit(2)
+	}
+
 	line_index := 0
 	for line in lines {
 		defer line_index += 1
@@ -112,6 +118,7 @@ apply_config :: proc(config: Config, all_configs: []Config) {
 		}
 	}
 
+
 	new_text := concat_array_slice(lines)
 
 	write_ok := os.write_entire_file(source_file_path, transmute([]u8)new_text)
@@ -124,9 +131,10 @@ apply_config :: proc(config: Config, all_configs: []Config) {
 }
 
 concat_array_slice :: proc(slice: []string) -> string {
-	final_string := ""
+	final_string := slice[0]
 
-	for line in slice {
+	for i in 1 ..< len(slice) {
+		line := slice[i]
 		final_string = strings.concatenate({final_string, "\n", line})
 	}
 
