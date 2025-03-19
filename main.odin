@@ -26,7 +26,6 @@ Config :: struct {
 
 source_file_path: string
 
-// FIXME: the script adds an empty line at the beginning
 main :: proc() {
 	if len(os.args) != 2 {
 		println(HELP_TEXT)
