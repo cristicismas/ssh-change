@@ -4,11 +4,11 @@ This is a small utility script to comment / uncomment some ssh config from your 
 
 ## Installation
 
-1. Grab it from the releases tab
+- Grab it from the releases tab
 
 or
 
-2. Build it with the odin compiler. Just install the odin compiler and run `odin build .` in the repo's directory.
+- Build it with the odin compiler. Just install the odin compiler and run `odin build .` in the repo's directory.
 
 ## Usage:
 
